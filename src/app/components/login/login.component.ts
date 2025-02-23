@@ -33,10 +33,10 @@ export class LoginComponent implements OnInit {
     private authService: AuthService
   ) { }
 
-  ngOnInit() {
+  async ngOnInit() {
       const isUser = this.authService.isAuthenticated();
       if (isUser) {
-        this.router.navigate(['movies']);
+        await this.router.navigate(['movies']);
       }
    }
 
@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
     try {
       const userToken = await this.authService.signin(body);
       localStorage.setItem('token', userToken);
-      this.router.navigate(['..']);
+      await this.router.navigate(['..']);
     } catch (error) {
 
     }

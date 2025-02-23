@@ -108,7 +108,7 @@ export class DescriptionComponent implements OnInit {
   async reserveMovie(roomId: number) {
     const isLogin = this.authService.isAuthenticated();
     if (!isLogin) {
-      this.router.navigate(['auth']);
+      await this.router.navigate(['auth']);
     }
     const user: any = this.getUserdata(localStorage.getItem('token') as string);
 
