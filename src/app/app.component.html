@@ -1,0 +1,19 @@
+<mat-toolbar>
+  <button mat-button class="button-row__button" style="font-size: 28px;" (click)="goToHome()">Cinema</button>
+  <span class="spacer"></span>
+  @if(isUserLogin) {
+    <div class="button-row">
+      <button mat-button="button-row__button" style="font-size: 22px;" (click)="goToProfile()">Perfil</button>
+      <button mat-icon-button class="button-row__button" aria-label="Example icon-button with heart icon" (click)="logout()">
+        <mat-icon>logout</mat-icon>
+      </button>
+    </div>
+  } @else {
+    <button mat-button (click)="goToLogin()" style="font-size: 22px;">Acceder</button>
+  }
+</mat-toolbar>
+<div class="app-container">
+  <div class="content">
+    <router-outlet></router-outlet>
+  </div>
+</div>

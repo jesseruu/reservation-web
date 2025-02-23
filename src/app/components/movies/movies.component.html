@@ -1,0 +1,24 @@
+<div class="page-movies">
+    <div class="page-movies__title">
+        <h1>Catalogo</h1>
+        <p>Selecciona una película de la selección y hace su reserva.</p>
+    </div>
+
+    <div class="page-movies__content">
+        @for(movie of movies; track movie.id) {
+        <mat-card (click)="goToMovie(movie.id)" class="page-movies__card">
+            <img mat-card-image src="{{movie.imageUrl}}"
+                alt="Movie poster for {{movie.title}}">
+                <div class="page-movies__card__title">
+                    <h3>{{movie.title}}</h3>
+                    
+                    <p>{{movie.classification.name}}</p>
+                </div>
+
+        </mat-card>
+        }
+    </div>
+    <mat-paginator [length]="count" (page)="handlePageEvent($event)" [pageSizeOptions]="[5, 10, 25, 100]"
+        [pageSize]="10" [hidePageSize]="true" aria-label="Select page">
+    </mat-paginator>
+</div>

@@ -1,0 +1,37 @@
+<div class="profile-page">
+    <h1>Su perfil</h1>
+    <p class="profile-page__text">Puede ver la información del usuario y tus reservas.</p>
+    <div class="profile-page__content">
+        <div class="profile-page__content__info">
+            <div class="profile-page__content__movie__text">
+                <h3>Nombre</h3>
+                <p>{{user.name}}</p>
+                <h3>Correo Electronico</h3>
+                <p>{{user.email}}</p>
+                <button mat-flat-button class="buttons buttons-color" (click)="generateReport(reservations)">Generar reporte</button>
+            </div>
+        </div>
+        <div class="profile-page__content__reservations">
+            <h2>Reservas</h2>
+            <p>Aquí encontraras un historial de todas las reservas que has realizado</p>
+            @for (reservation of reservations; track $index) {
+                <div class="profile-page__content__reservations__accordion">
+                    <mat-accordion>
+                        <mat-expansion-panel>
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>{{reservation.movie.name}}</mat-panel-title>
+                                <mat-panel-description>{{reservation.startTime}} </mat-panel-description>
+                            </mat-expansion-panel-header>
+                            <div class="description-page__content__reservations__info">
+                                <h4>Nombre de la sala</h4>
+                                <p>{{reservation.room.name}}</p>
+                                <h4>Asientos reservados</h4>
+                                <p>{{reservation.room.seats.length}}</p>
+                            </div>
+                        </mat-expansion-panel>
+                    </mat-accordion>
+                </div>
+            }
+        </div>
+    </div>
+</div>

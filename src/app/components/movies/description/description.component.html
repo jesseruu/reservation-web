@@ -1,0 +1,66 @@
+<div class="description-page">
+    <h1>{{movieInfo.name}}</h1>
+    <div class="description-page__content">
+        <div class="description-page__content__movie">
+            <img src="{{movieInfo.imageUrl}}" alt="Movie poster for {{movieInfo.name}}">
+            <div class="description-page__content__movie__text">
+                <h3>Descripción</h3>
+                <p>{{movieInfo.description}}</p>
+                <h3>Categorias</h3>
+                <mat-chip-set>
+                    @for (genre of movieInfo.genres; track $index) {
+                    <mat-chip [highlighted]="true">{{genre}}</mat-chip>
+                    }
+                </mat-chip-set>
+                <h3>Duración</h3>
+                <p>{{movieInfo.duration}} minutos</p>
+                <h3>Año de salida</h3>
+                <p>{{movieInfo.releaseDate}}</p>
+            </div>
+        </div>
+        <div class="description-page__content__rooms">
+            <h2>Salas</h2>
+            <p>Podrás reservar las película y selección una o mas asientos.</p>
+            @for (room of roomsInfo; track $index) {
+            <div class="description-page__content__rooms__accordion">
+                <mat-accordion>
+                    <mat-expansion-panel>
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>{{room.name}} </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <div class="description-page__content__rooms__schedule">
+                            <mat-chip-set>
+                                @for (day of days; track $index) {
+                                <mat-chip [highlighted]="true" (click)="getDate(room.id,day)">{{day}}</mat-chip>
+                                }
+                            </mat-chip-set>
+                        </div>
+                        <div class="description-page__content__rooms__seats">
+                            @for(seat of seats[$index]; track $index) {
+                            <button mat-icon-button class="button-row__button"
+                                aria-label="Example icon-button with heart icon"
+                                (click)="getSelectedSeat(room.id, seat)">
+                                <mat-icon>chair</mat-icon>
+                            </button>
+                            }
+                        </div>
+                        <div class="description-page__content__rooms__info">
+                            <h4>Hora seleccionada</h4>
+                            @if (selectedDate.has(room.id)) {
+                                <p>{{selectedDate.get(room.id)}}</p>
+                            }
+                            @if(selectedSeats.has(room.id)) {
+                                <h4>Asientos seleccionados</h4>
+                                @for (selectedSeat of selectedSeats.get(room.id); track $index) {
+                                    <p>{{selectedSeat}}</p>
+                                }
+                            }
+                            <button mat-flat-button class="buttons buttons-color" [disabled]="!isValidReservation(room.id)" (click)="reserveMovie(room.id)">Reservar</button>
+                        </div>
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </div>
+            }
+        </div>
+    </div>
+</div>

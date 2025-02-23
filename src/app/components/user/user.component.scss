@@ -1,0 +1,49 @@
+.profile-page {
+    padding: 36px;
+    background-color: white;
+    border-radius: 28px;
+    max-width: 1500px;
+    margin: 30px auto;
+
+    h1 {
+        padding-left: 48px;
+        padding-right: 48px;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 48px;
+        line-height: 57px;
+        letter-spacing: -0.333333px;
+    }
+
+    &__text {
+        font-size: 24px;
+        padding-left: 48px;
+    }
+
+    &__content {
+        display: grid;
+        grid-template-columns: 0.5fr 1fr;
+        grid-template-rows: 1fr;
+        gap: 0px 0px;
+
+        &__info {
+
+            padding: 24px;
+            padding-left: 48px;
+
+            &__text {
+                padding: 26px;
+
+            }
+        }
+
+        &__reservations {
+            padding: 24px;
+
+            &__accordion {
+                margin: 26px auto;
+            }
+        }
+    }
+
+}

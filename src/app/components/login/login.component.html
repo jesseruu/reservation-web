@@ -1,0 +1,80 @@
+@if(!needSignup) {
+<div class="login-page">
+    <form class="login-page__signin" [formGroup]="LoginForm">
+        <h1 class="login-page__title">Bienvenido/a</h1>
+        <mat-form-field class="login-page__input">
+            <mat-label>Email</mat-label>
+            <input type="email" matInput [formControl]="LoginForm.controls.email" placeholder="Ej. juan@email.com"
+                required>
+            <mat-hint>¡Las notificaciones de reserva llegaran a este correo!</mat-hint>
+
+            @if (LoginForm.controls.email.hasError('email') && !LoginForm.controls.email.hasError('required')) {
+            <mat-error>El correo electronico no es valido</mat-error>
+            }
+            @if (LoginForm.controls.email.hasError('required')) {
+            <mat-error>El correo es <strong>requerido</strong></mat-error>
+            }
+        </mat-form-field>
+        <mat-form-field class="login-page__input">
+            <mat-label>Contraseña</mat-label>
+            <input type="password" matInput [formControl]="LoginForm.controls.password">
+            <mat-hint>¡Cualquier contraseña es mejor que 123password!</mat-hint>
+            @if (LoginForm.controls.password.hasError('required')) {
+            <mat-error>La contraseña es <strong>requerida</strong></mat-error>
+            }
+        </mat-form-field>
+
+        <div class="login-page__buttons">
+            <button mat-flat-button class="buttons buttons-color" (click)="login()" [disabled]= "!LoginForm.valid">Acceder</button>
+            <button mat-button  class="buttons" (click)="goBackToHome()">Cancelar</button>
+        </div>
+        <div class="login-page__footer">
+            <p>¿Aun no tienes una cuenta?</p>
+            <button mat-button class="buttons" (click)="enableSignup()">Crear cuenta</button>
+        </div>
+</form>
+</div>
+} @else {
+<div class="login-page">
+    <form class="login-page__signin" [formGroup]="SignupForm">
+            <h1 class="login-page__title">Crear tu cuenta</h1>
+            <mat-form-field class="login-page__input">
+                <mat-label>Nombre</mat-label>
+                <input type="text" matInput [formControl]="SignupForm.controls.name" placeholder="Ej. Juan" required>
+                <mat-hint>Este nombre no se compartira con nadie</mat-hint>
+                @if (SignupForm.controls.name.hasError('required')) {
+                <mat-error>El nombre es <strong>requerido</strong></mat-error>
+                }
+            </mat-form-field>
+            <mat-form-field class="login-page__input">
+                <mat-label>Email</mat-label>
+                <input type="email" matInput [formControl]="SignupForm.controls.email" placeholder="Ej. juan@email.com"
+                    required>
+                <mat-hint>¡Las notificaciones de reserva llegaran a este correo!</mat-hint>
+                @if (SignupForm.controls.email.hasError('email') && !SignupForm.controls.email.hasError('required')) {
+                <mat-error>El correo electronico no es valido</mat-error>
+                }
+                @if (SignupForm.controls.email.hasError('required')) {
+                <mat-error>El correo es <strong>requerido</strong></mat-error>
+                }
+            </mat-form-field>
+            <mat-form-field class="login-page__input">
+                <mat-label>Contraseña</mat-label>
+                <input type="password" matInput [formControl]="SignupForm.controls.password">
+                <mat-hint>¡Elija una contraseña segura!</mat-hint>
+                @if (SignupForm.controls.email.hasError('required')) {
+                <mat-error>La contraseña es <strong>requerida</strong></mat-error>
+                }
+            </mat-form-field>
+
+        <div class="login-page__buttons">
+            <button mat-flat-button class="buttons" (click)="signup()" [disabled]= "!SignupForm.valid">Crear cuenta</button>
+            <button mat-button class="buttons" (click)="goBackToHome()">Cancelar</button>
+        </div>
+        <div class="login-page__footer">
+            <p>¿Tienes cuenta?</p>
+            <button mat-button class="buttons" (click)="disableSignup()">Acceder</button>
+        </div>
+    </form>
+</div>
+}
