@@ -109,6 +109,7 @@ export class DescriptionComponent implements OnInit {
     const isLogin = this.authService.isAuthenticated();
     if (!isLogin) {
       await this.router.navigate(['auth']);
+      return;
     }
     const user: any = this.getUserdata(localStorage.getItem('token') as string);
 
@@ -126,7 +127,7 @@ export class DescriptionComponent implements OnInit {
       this.openSnackBar('Reserva con exito, una notificación llegara printo', 'Cerrar')
       await this.router.navigate(['movies']);
     } catch (error) {
-      this.openSnackBar('Un error ocurrio haciando la reserva', 'Cerrar')
+      this.openSnackBar('Un error ocurrio haciendo la reserva', 'Cerrar')
     }
   }
 
