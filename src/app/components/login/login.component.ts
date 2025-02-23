@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -7,6 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth/auth.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -15,6 +16,7 @@ import { AuthService } from '../../services/auth/auth.service';
   styleUrl: './login.component.scss'
 })
 export class LoginComponent implements OnInit {
+  private _snackBar = inject(MatSnackBar);
   needSignup = false;
 
   LoginForm = new FormGroup({
@@ -49,11 +51,11 @@ export class LoginComponent implements OnInit {
     try {
       const userToken = await this.authService.signin(body);
       localStorage.setItem('token', userToken);
+      this.openSnackBar('Inicio de sesion exito', 'Cerrar');
       await this.router.navigate(['..']);
     } catch (error) {
-
+      this.openSnackBar('Correo electronico o contraseña no valida', 'Cerrar');
     }
-
   }
 
   async signup() {
@@ -64,9 +66,10 @@ export class LoginComponent implements OnInit {
     }
     try {
       await this.authService.signup(body);
+      this.openSnackBar('Cuenta creada con exito', 'Cerrar');
       this.needSignup = false;
     } catch (error) {
-
+      this.openSnackBar('Un error ocurrio creando cuenta, intente más tarde', 'Cerrar');
     }
 
   }
@@ -81,5 +84,9 @@ export class LoginComponent implements OnInit {
 
   async goBackToHome() {
     await this.router.navigate(['movies']);
+  }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action);
   }
 }

@@ -127,7 +127,7 @@ export class DescriptionComponent implements OnInit {
       this.openSnackBar('Reserva con exito, una notificación llegara printo', 'Cerrar')
       await this.router.navigate(['movies']);
     } catch (error) {
-      this.openSnackBar('Un error ocurrio haciendo la reserva', 'Cerrar')
+      this.openSnackBar('Un error ocurrio haciendo la reserva', 'Cerrar');
     }
   }
 
