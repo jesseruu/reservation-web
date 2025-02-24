@@ -26,6 +26,21 @@
         grid-template-rows: 1fr;
         gap: 0px 0px;
 
+        &__create {
+            &__movies {
+                margin-bottom: 20px;
+            }
+        }
+
+        &__fields {
+            &__input {
+                margin-right: 16px;
+                width: 100%;
+                max-width: 420px;
+                min-width: 150px;
+            }
+        }
+
         &__info {
 
             padding: 24px;

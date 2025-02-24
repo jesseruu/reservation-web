@@ -23,6 +23,16 @@ export class ReservationService {
       return reservation;
     }
 
+    async getAllReservation() {
+      const url = `${environment.url}/reservations`;
+      const response = await fetch(url, { method: 'GET', headers: this.headers });
+      if (!response.ok) {
+        console.log('An error occurred')
+      }
+      const reservation = await response.json();
+      return reservation;
+    }
+
     async createReservation(userId: string, body: {
       movieId: string,
       roomId: string,

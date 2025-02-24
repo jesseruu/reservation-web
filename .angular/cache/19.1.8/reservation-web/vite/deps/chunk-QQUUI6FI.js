@@ -1,6 +1,6 @@
 import {
   BidiModule
-} from "./chunk-QXJXKYDF.js";
+} from "./chunk-X6GBH2A6.js";
 import {
   Platform,
   _CdkPrivateStyleLoader,
@@ -12,14 +12,13 @@ import {
   coerceElement,
   coerceNumberProperty,
   normalizePassiveListenerOptions
-} from "./chunk-XCJDLUCW.js";
+} from "./chunk-EKMAZESN.js";
 import {
   DOCUMENT
-} from "./chunk-HUYANO5V.js";
+} from "./chunk-5BEK3Q4O.js";
 import {
   ANIMATION_MODULE_TYPE,
   APP_ID,
-  BehaviorSubject,
   CSP_NONCE,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -34,34 +33,18 @@ import {
   LOCALE_ID,
   NgModule,
   NgZone,
-  Observable,
   Output,
   QueryList,
-  Subject,
-  Subscription,
   Version,
   ViewChild,
   ViewEncapsulation,
   afterNextRender,
   booleanAttribute,
-  combineLatest,
-  concat,
-  debounceTime,
-  distinctUntilChanged,
   effect,
-  filter,
   inject,
-  isObservable,
   isSignal,
-  map,
-  of,
   setClassMetadata,
   signal,
-  skip,
-  startWith,
-  take,
-  takeUntil,
-  tap,
   ɵɵNgOnChangesFeature,
   ɵɵProvidersFeature,
   ɵɵadvance,
@@ -88,7 +71,26 @@ import {
   ɵɵtext,
   ɵɵtextInterpolate1,
   ɵɵviewQuery
-} from "./chunk-SBMMMEUW.js";
+} from "./chunk-ZXNQQMV3.js";
+import {
+  BehaviorSubject,
+  Observable,
+  Subject,
+  Subscription,
+  combineLatest,
+  concat,
+  debounceTime,
+  distinctUntilChanged,
+  filter,
+  isObservable,
+  map,
+  of,
+  skip,
+  startWith,
+  take,
+  takeUntil,
+  tap
+} from "./chunk-P6U2JBMQ.js";
 import {
   __spreadProps,
   __spreadValues
@@ -5215,4 +5217,4 @@ export {
   MatOptionModule,
   MatRippleLoader
 };
-//# sourceMappingURL=chunk-U7KSJ64K.js.map
+//# sourceMappingURL=chunk-QQUUI6FI.js.map

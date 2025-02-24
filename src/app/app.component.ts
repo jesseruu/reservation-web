@@ -15,9 +15,9 @@ import { AuthService } from './services/auth/auth.service';
 export class AppComponent implements OnInit {
   title = 'reservation-web';
   isUserLogin = false;
-  isAdmin = false;
 
-  constructor(private router: Router, private authService: AuthService) {}
+  constructor(private router: Router, private authService: AuthService) {
+  }
 
   async goToLogin() {
     await this.router.navigate(['auth']);
@@ -25,22 +25,23 @@ export class AppComponent implements OnInit {
 
   async logout() {
     await this.authService.logout();
-    this.checkUser();
+    this.isUserLogin = this.authService.isAuthenticated();
   }
 
   async goToHome() {
     await this.router.navigate(['movies']);
   }
 
-  checkUser() {
-    this.isUserLogin = this.authService.isAuthenticated();
-  }
-
   async goToProfile() {
     await this.router.navigate(['profile']);
   }
 
+  get isAuthenticated(): boolean {
+    this.isUserLogin = this.authService.isUserAuthenticated;
+    return this.isUserLogin;
+  }
+
   ngOnInit(): void {
-    this.checkUser();
+    this.isUserLogin = this.authService.isAuthenticated();
   }
 }

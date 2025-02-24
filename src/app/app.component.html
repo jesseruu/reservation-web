@@ -1,7 +1,7 @@
 <mat-toolbar>
   <button mat-button class="button-row__button" style="font-size: 28px;" (click)="goToHome()">Cinema</button>
   <span class="spacer"></span>
-  @if(isUserLogin) {
+  @if(isUserLogin || isAuthenticated) {
     <div class="button-row">
       <button mat-button="button-row__button" style="font-size: 22px;" (click)="goToProfile()">Perfil</button>
       <button mat-icon-button class="button-row__button" aria-label="Example icon-button with heart icon" (click)="logout()">

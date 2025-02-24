@@ -1,6 +1,11 @@
 <div class="profile-page">
-    <h1>Su perfil</h1>
-    <p class="profile-page__text">Puede ver la información del usuario y tus reservas.</p>
+    @if (user.name === 'admin') {
+        <h1>Su perfil de administración</h1>
+        <p class="profile-page__text">Puedes administracion la información de pelicula</p>
+    } @else {
+        <h1>Su perfil</h1>
+        <p class="profile-page__text">Puede ver la información del usuario y tus reservas.</p>
+    }
     <div class="profile-page__content">
         <div class="profile-page__content__info">
             <div class="profile-page__content__movie__text">
@@ -12,25 +17,94 @@
             </div>
         </div>
         <div class="profile-page__content__reservations">
-            <h2>Reservas</h2>
-            <p>Aquí encontraras un historial de todas las reservas que has realizado</p>
-            @for (reservation of reservations; track $index) {
-                <div class="profile-page__content__reservations__accordion">
-                    <mat-accordion>
-                        <mat-expansion-panel>
-                            <mat-expansion-panel-header>
-                                <mat-panel-title>{{reservation.movie.name}}</mat-panel-title>
-                                <mat-panel-description>{{reservation.startTime}} </mat-panel-description>
-                            </mat-expansion-panel-header>
-                            <div class="description-page__content__reservations__info">
-                                <h4>Nombre de la sala</h4>
-                                <p>{{reservation.room.name}}</p>
-                                <h4>Asientos reservados</h4>
-                                <p>{{reservation.room.seats.length}}</p>
-                            </div>
-                        </mat-expansion-panel>
-                    </mat-accordion>
+            @if (user.name === 'admin') {
+                <h2>Administrador/ra</h2>
+                <p>Aquí podras crear nuevas peliculas</p>
+            } @else {
+                <h2>Reservas</h2>
+                <p>Aquí encontraras un historial de todas las reservas que has realizado</p>
+            }
+
+            @if (user.name === 'admin') {
+                <div class="profile-page__content__create">
+                    <form class="profile-page__content__create__movies" [formGroup]="MoviesForm">
+                        <div class="profile-page__content__fields">
+                            <mat-form-field class="profile-page__content__fields__input">
+                                <mat-label>Titulo</mat-label>
+                                <input type="text" matInput [formControl]="MoviesForm.controls.title" placeholder="Avengers"
+                                    required>
+                                @if (MoviesForm.controls.title.hasError('required')) {
+                                <mat-error>El titulo es <strong>requerido</strong></mat-error>
+                                }
+                            </mat-form-field>
+                            <mat-form-field class="profile-page__content__fields__input">
+                                <mat-label>Genero cinematografico</mat-label>
+                                <input type="text" matInput [formControl]="MoviesForm.controls.genres">
+                                @if (MoviesForm.controls.genres.hasError('required')) {
+                                <mat-error>El genero es <strong>requerido</strong></mat-error>
+                                }
+                            </mat-form-field>
+                            <mat-form-field class="profile-page__content__fields__input">
+                                <mat-label>Fecha de salida</mat-label>
+                                <input type="number" matInput [formControl]="MoviesForm.controls.releaseDate">
+                                @if (MoviesForm.controls.releaseDate.hasError('required')) {
+                                <mat-error>La fecha de salida es <strong>requerida</strong></mat-error>
+                                }
+                            </mat-form-field>
+                            <mat-form-field class="profile-page__content__fields__input">
+                                <mat-label>Duracion en minutos</mat-label>
+                                <input type="number" matInput [formControl]="MoviesForm.controls.duration">
+                                @if (MoviesForm.controls.duration.hasError('required')) {
+                                <mat-error>La duracion es <strong>requerida</strong></mat-error>
+                                }
+                            </mat-form-field>
+                            <mat-form-field class="profile-page__content__fields__input">
+                                <mat-label>Url de la portada</mat-label>
+                                <input type="text" matInput [formControl]="MoviesForm.controls.imageUrl">
+                                @if (MoviesForm.controls.imageUrl.hasError('required')) {
+                                <mat-error>La imagen es de portada <strong>requerida</strong></mat-error>
+                                }
+                            </mat-form-field>
+                            <mat-form-field class="profile-page__content__fields__input">
+                                <mat-label>Clasificación</mat-label>
+                                <input type="text" matInput [formControl]="MoviesForm.controls.classification">
+                                @if (MoviesForm.controls.classification.hasError('required')) {
+                                <mat-error>La clasificación es<strong>requerida</strong></mat-error>
+                                }
+                            </mat-form-field>
+                            <mat-form-field class="profile-page__content__fields__input">
+                                <mat-label>Descripcion</mat-label>
+                                <textarea matInput [formControl]="MoviesForm.controls.description"></textarea>
+                                @if (MoviesForm.controls.description.hasError('required')) {
+                                <mat-error>La descripcion es <strong>requerida</strong></mat-error>
+                                }
+                            </mat-form-field>
+                        </div>
+
+                        <div class="profile-page__buttons">
+                            <button mat-button class="buttons" [disabled]="!MoviesForm.valid" (click)="createMovie()">Crear pelicula</button>
+                        </div>
+                </form>
                 </div>
+            }@else {
+                @for (reservation of reservations; track $index) {
+                    <div class="profile-page__content__reservations__accordion">
+                        <mat-accordion>
+                            <mat-expansion-panel>
+                                <mat-expansion-panel-header>
+                                    <mat-panel-title>{{reservation.movie.name}}</mat-panel-title>
+                                    <mat-panel-description>{{reservation.startTime}} </mat-panel-description>
+                                </mat-expansion-panel-header>
+                                <div class="description-page__content__reservations__info">
+                                    <h4>Nombre de la sala</h4>
+                                    <p>{{reservation.room.name}}</p>
+                                    <h4>Asientos reservados</h4>
+                                    <p>{{reservation.room.seats.length}}</p>
+                                </div>
+                            </mat-expansion-panel>
+                        </mat-accordion>
+                    </div>
+                }
             }
         </div>
     </div>

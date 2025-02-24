@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,11 +12,11 @@ export class AuthGuardService {
 
   }
 
-  canActivate(): boolean {
-    if(!this.authService.isAuthenticated()) {
-        this.router.navigate(['auth']);
-        return false;
+  async canActivate() {
+    if (!this.authService.isAuthenticated()) {
+      await this.router.navigate(['auth']);
+      return false;
     }
     return true;
-}
+  }
 }
